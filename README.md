@@ -44,7 +44,9 @@ Wait for the plugin to generate map. It will be located in the map folder.
 To save the parameters )`xmin`, `xmax`, `ymin`, `ymax`, `resolution`) to a yaml file:
 
 ```bash
-roslaunch pgm_map_creator dump_map_gen_param.launch
+roslaunch pgm_map_creator dump_map_gen_param.launch \
+    map_name:=<pgm_map_name> \
+    save_folder:=<folder_where_to_save_map>
 ```
 
 ## Map Properties
@@ -62,6 +64,6 @@ free_thresh: 0.196
 ```
 
 ## Acknowledgements
-[Gazebo Custom Messages](http://gazebosim.org/wiki/Tutorials/1.9/custom_messages)
-[Gazebo Perfect Map Generator](https://github.com/koenlek/ros_lemtomap/tree/154c782cf8feb9112bc928e33a59728ca2192489/st_gazebo_perfect_map_generator)
 
+- [Gazebo Custom Messages](http://gazebosim.org/wiki/Tutorials/1.9/custom_messages)
+- [Gazebo Perfect Map Generator](https://github.com/koenlek/ros_lemtomap/tree/154c782cf8feb9112bc928e33a59728ca2192489/st_gazebo_perfect_map_generator)
