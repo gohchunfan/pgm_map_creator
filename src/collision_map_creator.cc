@@ -104,8 +104,11 @@ class CollisionMapCreator : public WorldPlugin
     {
       std::cout << "Percent complete: " << i * 100.0 / count_vertical
                 << std::endl;
-      x = i * dX_vertical + msg->lowerleft().x();
-      y = i * dY_vertical + msg->lowerleft().y();
+      // x = i * dX_vertical + msg->lowerleft().x();
+      // y = i * dY_vertical + msg->lowerleft().y();
+      // for image, the indexing starts from upper left corner
+      x = msg->upperleft().x() - i * dX_vertical;
+      y = msg->upperleft().y() - i * dY_vertical;
       for (int j = 0; j < count_horizontal; ++j)
       {
         x += dX_horizontal;
@@ -119,7 +122,8 @@ class CollisionMapCreator : public WorldPlugin
         ray->GetIntersection(dist, entityName);
         if (!entityName.empty())
         {
-          image._view(i,j) = fill;
+          // image._view(i,j) = fill;
+          image._view(j,i) = fill; // the gil indexing pattern is (z, y, x)
         }
       }
     }

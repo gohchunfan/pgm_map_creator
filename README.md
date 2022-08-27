@@ -17,14 +17,49 @@ Tested on Ubuntu 19.04, ROS Melodic, Boost 1.65
 `<plugin filename="libcollision_map_creator.so" name="collision_map_creator"/>`
 
 ### Create the pgm map file
-1. Open a terminal, run gzerver with the map file
-`gzserver src/pgm_map_creator/world/<map file>`
-2. Open another terminal, launch the request_publisher node
-`roslaunch pgm_map_creator request_publisher.launch`
-3. Wait for the plugin to generate map. It will be located in the map folder
+
+Open a terminal, run gazebo with the world file
+
+```bash
+gazebo src/pgm_map_creator/world/<world file>
+
+```
+
+Open another terminal, launch the request_publisher node
+
+```bash
+roslaunch pgm_map_creator request_publisher.launch \
+    map_name:=<pgm_map_name> \
+    save_folder:=<folder_where_to_save_map> \
+    xmin:=<x_min value> \
+    xmax:=<x_max value> \
+    ymin:=<y_min value> \
+    ymax:=<y_max value>
+```
+
+Wait for the plugin to generate map. It will be located in the map folder.
+
+### Save map generation parameters
+
+To save the parameters )`xmin`, `xmax`, `ymin`, `ymax`, `resolution`) to a yaml file:
+
+```bash
+roslaunch pgm_map_creator dump_map_gen_param.launch
+```
 
 ## Map Properties
-Currently, please update the argument value in launch/request_publisher.launch file.
+
+To use the map, the map proeprties need to be specified in a `[pgm_map_name].yaml`.
+Input the following parameters in the file:
+
+```bash
+image: <pgm_map_name>.pgm
+resolution: <resolution>
+origin: [<xmin>, <ymin>, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+```
 
 ## Acknowledgements
 [Gazebo Custom Messages](http://gazebosim.org/wiki/Tutorials/1.9/custom_messages)
